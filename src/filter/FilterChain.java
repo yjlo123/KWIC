@@ -1,4 +1,4 @@
-package model;
+package filter;
 import filter.*;
 import java.util.ArrayList;
 
@@ -29,7 +29,7 @@ public class FilterChain {
         }
         else return null;
     }
-    public void run(String str){
-        this.getHead().run(str);
+    public void run(String titles, String ignoredWords){
+        this.getHead().run(titles,ignoredWords);
     }
 }
