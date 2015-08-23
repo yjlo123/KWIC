@@ -1,6 +1,10 @@
 package UI;
 
+import events.Controller;
+
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -49,5 +53,55 @@ public class GUIMain {
         frame.setVisible(true);
         frame.setResizable(false);
 
+        //mGUI.showResult("result..");
+
+        addListeners(mGUI);
+        mGUI.showMessage("Event mode.");
+
+    }
+
+    private static void addListeners(GUI mGUI){
+        final JTextArea titleText = mGUI.titleText;
+        final JTextArea ignoreText = mGUI.ignoreText;
+        final JTextArea resultPanel = mGUI.resultPanel;
+
+        final Controller controller = new Controller();
+        controller.init(mGUI);
+
+        titleText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                controller.process(titleText.getText(), ignoreText.getText());
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                controller.process(titleText.getText(), ignoreText.getText());
+            }
+
+        });
+
+        ignoreText.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                controller.process(titleText.getText(), ignoreText.getText());
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                controller.process(titleText.getText(), ignoreText.getText());
+            }
+
+        });
     }
 }

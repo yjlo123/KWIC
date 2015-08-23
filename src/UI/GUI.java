@@ -17,7 +17,7 @@ public class GUI extends JPanel implements ActionListener {
     protected JTextField msgBox;
     public JTextArea titleText;
     public JTextArea ignoreText;
-    public JTextArea resultPanel;
+    public static JTextArea resultPanel;
 
     GridBagConstraints gbc = new GridBagConstraints();
 
@@ -52,6 +52,7 @@ public class GUI extends JPanel implements ActionListener {
         titleText.setCaretColor(Color.WHITE);
         titleText.setFont(font);
         titleText.setEditable(true);
+        titleText.setLineWrap(true);
         JScrollPane scrollTitleText = new JScrollPane(titleText);
         scrollTitleText.setBorder(border);
         gbc.gridx = 0;
@@ -67,6 +68,7 @@ public class GUI extends JPanel implements ActionListener {
         ignoreText.setCaretColor(Color.WHITE);
         ignoreText.setFont(font);
         ignoreText.setEditable(true);
+        ignoreText.setLineWrap(true);
         JScrollPane scrollIgnoreText = new JScrollPane(ignoreText);
         scrollIgnoreText.setBorder(BorderFactory.createMatteBorder(
                 0, 5, 5, 5, Color.GRAY));
@@ -81,7 +83,6 @@ public class GUI extends JPanel implements ActionListener {
         resultPanel.setForeground(Color.GREEN);
         resultPanel.setBackground(Color.BLACK);
         resultPanel.setFont(font);
-        resultPanel.setEditable(true);
         resultPanel.setLineWrap(true);
         resultPanel.setEditable(false);
         JScrollPane scrollResultText = new JScrollPane(resultPanel);
@@ -93,27 +94,13 @@ public class GUI extends JPanel implements ActionListener {
         gbc.gridwidth = 1;
         gbc.fill = GridBagConstraints.BOTH;
         add(scrollResultText, gbc);
-
-        titleText.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                resultPanel.setText(titleText.getText());
-            }
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                showMessage("Processing...");
-                resultPanel.setText(titleText.getText());
-                showMessage("Done.");
-            }
-
-        });
     }
 
-    private void showMessage(String msg) {
+    public static void showResult(String result){
+        resultPanel.setText(result);
+    }
+
+    public void showMessage(String msg) {
         msgBox.setText(msg);
     }
 }

@@ -30,6 +30,6 @@ public class FilterChain {
         else return null;
     }
     public void run(String titles, String ignoredWords){
-        this.getHead().run(titles,ignoredWords);
+        //this.getHead().run(titles,ignoredWords);
     }
 }
