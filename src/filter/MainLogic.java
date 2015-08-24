@@ -14,7 +14,10 @@ public class MainLogic {
     private shiftFilter shiftfilter;
     private alphabetizerFilter alphafilter;
     private outputFilter outputfilter;
-    public MainLogic(){}
+    public MainLogic(){
+        init();
+    }
+
     private void init(){
         chain = new FilterChain();
         inputfilter = new inputFilter();
@@ -26,6 +29,7 @@ public class MainLogic {
         alphafilter.SetNext(outputfilter);
         setChain();
     }
+
     private void setChain(){
         chain.add(inputfilter);
         chain.add(shiftfilter);
@@ -35,8 +39,16 @@ public class MainLogic {
         chain.setTail(outputfilter);
 
     }
+
     public void run(){
-        init();
         chain.run(titles,ignoredWords);
+    }
+
+    public void finish(){
+
+    }
+
+    public void setOutputGUI(GUI gui){
+        outputfilter.setOutputGUI(gui);
     }
 }

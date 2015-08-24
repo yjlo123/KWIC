@@ -12,8 +12,6 @@ import events.model.Lines;
  */
 public class Controller {
 
-    static GUI gui;
-
     public static Lines lines = new Lines();
     public static Lines shiftedLines = new Lines();
     public static Lines ignoreWords = new Lines();
@@ -23,8 +21,11 @@ public class Controller {
     private CircularShift circularShift =  new CircularShift();
     private Alphabetizer alphabetizer = new Alphabetizer();
 
-    public void init(GUI g){
-        this.gui = g;
+    public Controller(){
+        init();
+    }
+
+    public void init(){
         input.addListener(circularShift);
         circularShift.addListener(alphabetizer);
         alphabetizer.addListener(output);
@@ -36,9 +37,8 @@ public class Controller {
         input.update();
     }
 
-    // when finish, update UI
-    public static void finish(){
-        gui.showResult(shiftedLines.toString());
+    public void setOutputGUI(GUI gui){
+        output.setOutputGUI(gui);
     }
 
 }

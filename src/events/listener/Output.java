@@ -1,5 +1,6 @@
 package events.listener;
 
+import UI.GUI;
 import events.Controller;
 
 import java.util.ArrayList;
@@ -10,6 +11,7 @@ import java.util.ArrayList;
 public class Output implements Listener {
 
     private ArrayList<Listener> listeners = new ArrayList<Listener>();
+    private GUI gui;
 
     @Override
     public void addListener(Listener listener) {
@@ -18,8 +20,12 @@ public class Output implements Listener {
 
     @Override
     public void update() {
-        Controller.finish();
+        this.gui.showResult(Controller.shiftedLines.toString());
         for (Listener l : listeners)
             l.update();
+    }
+
+    public void setOutputGUI(GUI gui){
+        this.gui = gui;
     }
 }
