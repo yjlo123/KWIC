@@ -11,20 +11,20 @@ import java.util.Collections;
 public class alphabetizerFilter extends Filter{
     private ArrayList<String> titlesList;
     private String outputString;
+
     //Methods
     public alphabetizerFilter(){
         super();
     }
 
-    public void run(){
-        initialise(FilterChain.getOutputTitles());
-
+    public void run(ArrayList<String> parsingPara){
+        initialise(parsingPara.get(0));
         Collections.sort(titlesList);
         this.outputString = convertToOutputString(this.titlesList);
-        FilterChain.setOutputTitles(this.outputString); // Save and Provide OutputFilter with SORTED String
+        String replace = parsingPara.set(0,outputString);// Save and Provide OutputFilter with SORTED String
         //call next according to the filter chain
         if(this.hasNext()){
-            this.getNext().run();
+            this.getNext().run(parsingPara);
         }
     }
     private void initialise(String titles){

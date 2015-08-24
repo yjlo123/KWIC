@@ -43,6 +43,6 @@ public class Filter {
         }
         return  result;
     }
-    public void run(){}
+    public void run(ArrayList<String> para){}
 
 }

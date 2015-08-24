@@ -11,9 +11,7 @@ public class FilterChain {
     private ArrayList<Filter> chain;
     private Filter Head = null;
     private Filter Tail = null;
-    private static String inputTitles="";
-    private static String inputIgnoredWords="";
-    private static String outputTitles="";
+    private ArrayList<String> parsingPara;
 
     //Methods
     public FilterChain(){
@@ -35,20 +33,8 @@ public class FilterChain {
         return Tail;
     }
     public void run(String titles, String ignoredWords){
-        this.inputTitles = titles;
-        this.inputIgnoredWords = ignoredWords;
-        this.getHead().run();
-    }
-    public static String getInputTitles(){
-        return inputTitles;
-    }
-    public static String getInputIgnoredWords(){
-        return inputIgnoredWords;
-    }
-    public static void setOutputTitles(String output){
-        outputTitles = output;
-    }
-    public static String getOutputTitles(){
-        return outputTitles;
+        parsingPara.add(titles);
+        parsingPara.add(ignoredWords);
+        this.getHead().run(parsingPara);
     }
 }

@@ -15,18 +15,22 @@ public class shiftFilter extends Filter {
     private ArrayList<String> ignoredWordsList;
     private ArrayList<String> outputList;
     private String outputString;
+    private String inputignoredwords,inputtitles;
+
     //Methods
     public shiftFilter(){
         super();
     }
-    public void run(){
-        initialiseStringList(FilterChain.getInputTitles(), FilterChain.getInputIgnoredWords());
+    public void run(ArrayList<String> parsingPara){
+        inputignoredwords = parsingPara.get(1);
+        inputtitles = parsingPara.get(0);
+        initialiseStringList(inputtitles,inputignoredwords);
         CircularlyShift();
         outputString = convertToOutputString(outputList);
-        FilterChain.setOutputTitles(outputString); // Save and Provide AlphaFilter with the UNSORTED String.
+        String replace = parsingPara.set(0,outputString);// Save and Provide AlphaFilter with the UNSORTED String.
         //call next according to the filter chain
         if(this.hasNext()){
-            this.getNext().run();
+            this.getNext().run(parsingPara);
         }
     }
 
@@ -58,7 +62,7 @@ public class shiftFilter extends Filter {
     }
 
     private String changeCase(String str){
-        if (FilterChain.getInputIgnoredWords().contains(str.toLowerCase())){
+        if (this.inputignoredwords.contains(str.toLowerCase())){
             return str.toLowerCase();
         }else{
             return str.substring(0, 1).toUpperCase() + str.substring(1);
