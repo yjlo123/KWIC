@@ -8,7 +8,12 @@ import java.util.ArrayList;
 public class FilterChain {
 
     //Attributes
-    public ArrayList<Filter> chain;
+    private ArrayList<Filter> chain;
+    private Filter Head = null;
+    private Filter Tail = null;
+    private static String inputTitles="";
+    private static String inputIgnoredWords="";
+    private static String outputTitles="";
 
     //Methods
     public FilterChain(){
@@ -17,19 +22,33 @@ public class FilterChain {
     public void add(Filter filter){
         chain.add(filter);
     }
+    public void setHead(Filter head){
+        this.Head = head;
+    }
+    public void setTail(Filter tail){
+        this.Tail = tail;
+    }
     public Filter getHead(){
-        if(!chain.isEmpty()){
-            return chain.get(0);
-        }
-        else return null;
+        return Head;
     }
     public Filter getTail(){
-        if(!chain.isEmpty()){
-            return chain.get(chain.size()-1);
-        }
-        else return null;
+        return Tail;
     }
     public void run(String titles, String ignoredWords){
-        //this.getHead().run(titles,ignoredWords);
+        this.inputTitles = titles;
+        this.inputIgnoredWords = ignoredWords;
+        this.getHead().run();
+    }
+    public static String getInputTitles(){
+        return inputTitles;
+    }
+    public static String getInputIgnoredWords(){
+        return inputIgnoredWords;
+    }
+    public static void setOutputTitles(String output){
+        outputTitles = output;
+    }
+    public static String getOutputTitles(){
+        return outputTitles;
     }
 }

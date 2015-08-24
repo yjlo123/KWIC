@@ -1,5 +1,7 @@
 package filter;
 
+import events.Controller;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,11 +19,15 @@ public class shiftFilter extends Filter {
     public shiftFilter(){
         super();
     }
-    public void run(String titles, String ignoredWords){
-        initialiseStringList(titles, ignoredWords);
+    public void run(){
+        initialiseStringList(FilterChain.getInputTitles(), FilterChain.getInputIgnoredWords());
         CircularlyShift();
         outputString = convertToOutputString(outputList);
-        //call next according to the filter chain with the outputString
+        FilterChain.setOutputTitles(outputString); // Save and Provide AlphaFilter with the UNSORTED String.
+        //call next according to the filter chain
+        if(this.hasNext()){
+            this.getNext().run();
+        }
     }
 
     private void initialiseStringList(String titles, String ignoredWords){
@@ -30,7 +36,7 @@ public class shiftFilter extends Filter {
         outputList = new ArrayList<String>();
         outputString = "";
         titlesList = toStringList(titles);
-        ignoredWordsList = toStringList(ignoredWords);
+        ignoredWordsList = toIgnoredList(ignoredWords);
     }
 
     private void CircularlyShift(){
@@ -50,11 +56,24 @@ public class shiftFilter extends Filter {
             }
         }
     }
+
+    private String changeCase(String str){
+        if (FilterChain.getInputIgnoredWords().contains(str.toLowerCase())){
+            return str.toLowerCase();
+        }else{
+            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        }
+    }
     private ArrayList<String> splitEachTitle(String title){
         return splitbySpace(title);
     }
     private ArrayList<String> splitbySpace(String title){
-        return new ArrayList<String>(Arrays.asList(title.split(" ")));
+        String[] result = title.split(" ");
+        for (int i = 0; i < result.length; i++){
+            result[i] = result[i].trim();
+            result[i] = changeCase(result[i]);
+        }
+        return new ArrayList<String>(Arrays.asList(result));
     }
     private ArrayList<String> Shift(ArrayList<String> lst){
         lst.add(lst.remove(0));

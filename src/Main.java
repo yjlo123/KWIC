@@ -1,6 +1,10 @@
+import filter.MainLogic;
+
 public class Main {
 
     public static void main(String[] args) {
-	    System.out.println("Hello.");
+
+        MainLogic ML = new MainLogic();
+        ML.run();
     }
 }

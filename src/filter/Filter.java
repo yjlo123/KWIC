@@ -22,9 +22,20 @@ public class Filter {
     public boolean hasNext(){
         return this.Next!=null;
     }
-    public ArrayList<String> toStringList(String str){
-        return new ArrayList<String>(Arrays.asList(str.split("\n")));
+    public Filter getNext(){
+        return this.Next;
     }
+    public ArrayList<String> toStringList(String str){
+        return new ArrayList<String>(Arrays.asList(str.split(",")));
+    }
+    public ArrayList<String> toIgnoredList(String str){
+        String[] result = str.split(",");
+        for (int i = 0; i < result.length; i++){
+            result[i] = result[i].trim();
+        }
+        return new ArrayList<String>(Arrays.asList(result));
+    }
+
     public String toString(ArrayList<String> strList){
         String result = "";
         for(String item : strList){
@@ -32,5 +43,6 @@ public class Filter {
         }
         return  result;
     }
+    public void run(){}
 
 }

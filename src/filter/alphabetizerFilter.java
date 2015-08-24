@@ -1,6 +1,8 @@
 package filter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 /**
@@ -13,19 +15,25 @@ public class alphabetizerFilter extends Filter{
     public alphabetizerFilter(){
         super();
     }
-    public void run(String titles){
-        initialise(titles);
-        sort();
-        outputString = convertToOutputString(titlesList);
-        //call next according to the filter chain with the outputString
+
+    public void run(){
+        initialise(FilterChain.getOutputTitles());
+
+        Collections.sort(titlesList);
+        this.outputString = convertToOutputString(this.titlesList);
+        FilterChain.setOutputTitles(this.outputString); // Save and Provide OutputFilter with SORTED String
+        //call next according to the filter chain
+        if(this.hasNext()){
+            this.getNext().run();
+        }
     }
     private void initialise(String titles){
-        titlesList = new ArrayList<String>();
-        outputString = "";
-        titlesList = toStringList(titles);
+        this.titlesList = new ArrayList<String>();
+        this.outputString = "";
+        this.titlesList = toList(titles);
     }
-    private void sort(){
-        Collections.sort(titlesList, String.CASE_INSENSITIVE_ORDER);
+    public ArrayList<String> toList(String str){
+        return new ArrayList<String>(Arrays.asList(str.split("\n")));
     }
     private String convertToOutputString(ArrayList<String> strList){
         String result = "";

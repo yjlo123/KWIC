@@ -8,4 +8,7 @@ public class outputFilter extends Filter {
     public outputFilter(){
         super();
     }
+    public void run(){
+        System.out.print(FilterChain.getOutputTitles());
+    }
 }

@@ -9,4 +9,9 @@ public class inputFilter extends Filter {
     public inputFilter(){
         super();
     }
+    public void run(){
+        if(this.hasNext()){
+            this.getNext().run();
+        }
+    }
 }
