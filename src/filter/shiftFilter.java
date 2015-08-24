@@ -15,20 +15,23 @@ public class shiftFilter extends Filter {
     private ArrayList<String> ignoredWordsList;
     private ArrayList<String> outputList;
     private String outputString;
-    private String inputignoredwords,inputtitles;
+    private String inputignoredwords="",inputtitles="";
 
     //Methods
     public shiftFilter(){
         super();
+
     }
     public void run(ArrayList<String> parsingPara){
         inputignoredwords = parsingPara.get(1);
         inputtitles = parsingPara.get(0);
-        initialiseStringList(inputtitles,inputignoredwords);
+        //System.out.println(inputtitles);
+        initialiseStringList(inputtitles, inputignoredwords);
         CircularlyShift();
         outputString = convertToOutputString(outputList);
         String replace = parsingPara.set(0,outputString);// Save and Provide AlphaFilter with the UNSORTED String.
         //call next according to the filter chain
+
         if(this.hasNext()){
             this.getNext().run(parsingPara);
         }
@@ -72,7 +75,7 @@ public class shiftFilter extends Filter {
         return splitbySpace(title);
     }
     private ArrayList<String> splitbySpace(String title){
-        String[] result = title.split(" ");
+        String[] result = title.split(" +");
         for (int i = 0; i < result.length; i++){
             result[i] = result[i].trim();
             result[i] = changeCase(result[i]);

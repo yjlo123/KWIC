@@ -6,7 +6,6 @@ import UI.GUI;
  * Created by haojiang on 23/8/15.
  */
 public class MainLogic {
-    static GUI gui;
 
     private String titles="The Day after Tomorrow,Fast and Furious,Man of Steel",ignoredWords="is, the, of, and, as, a, after";
     private FilterChain chain;
@@ -40,12 +39,10 @@ public class MainLogic {
 
     }
 
-    public void run(){
-        chain.run(titles,ignoredWords);
-    }
-
-    public void finish(){
-
+    public void process(String title, String ignore){
+      //  System.out.println(title);
+       // System.out.println(ignore);
+        chain.run(title, ignore);
     }
 
     public void setOutputGUI(GUI gui){

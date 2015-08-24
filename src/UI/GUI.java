@@ -97,6 +97,7 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public static void showResult(String result){
+        System.out.println(result);
         resultPanel.setText(result);
     }
 

@@ -11,7 +11,6 @@ import java.util.Arrays;
 public class Filter {
 
     //Attributes
-    public ArrayList<String> data;
     public Filter Next = null;
 
     //Methods
@@ -41,7 +40,7 @@ public class Filter {
         for(String item : strList){
             result = result+" "+item;
         }
-        return  result;
+        return  result.trim();
     }
     public void run(ArrayList<String> para){}
 

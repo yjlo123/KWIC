@@ -21,7 +21,7 @@ public class CircularShift implements Listener {
         Controller.shiftedLines.clear();
         // shift for each line
         for(int i = 0; i < Controller.lines.size(); i++){
-            String[] words = Controller.lines.get(i).split(" ");
+            String[] words = Controller.lines.get(i).split(" +");
             // shift start from each word in the line
             for (int j = 0; j < words.length; j++){
                 // if not start with a ignore word

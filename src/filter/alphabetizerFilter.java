@@ -15,6 +15,7 @@ public class alphabetizerFilter extends Filter{
     //Methods
     public alphabetizerFilter(){
         super();
+
     }
 
     public void run(ArrayList<String> parsingPara){

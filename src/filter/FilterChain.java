@@ -16,6 +16,7 @@ public class FilterChain {
     //Methods
     public FilterChain(){
         chain = new ArrayList<Filter>();
+
     }
     public void add(Filter filter){
         chain.add(filter);
@@ -33,6 +34,7 @@ public class FilterChain {
         return Tail;
     }
     public void run(String titles, String ignoredWords){
+        parsingPara = new ArrayList<String>();
         parsingPara.add(titles);
         parsingPara.add(ignoredWords);
         this.getHead().run(parsingPara);

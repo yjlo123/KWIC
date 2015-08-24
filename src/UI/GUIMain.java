@@ -53,12 +53,14 @@ public class GUIMain {
         ActionListener actionModeEvent = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mGUI.showMessage("Event mode.");
+                mode = Mode.EVENT;
             }
         };
 
         ActionListener actionModeFilter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mGUI.showMessage("Filter mode.");
+                mode = Mode.FILTER;
             }
         };
 
@@ -113,12 +115,20 @@ public class GUIMain {
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                eventController.process(titleText.getText(), ignoreText.getText());
+                if (mode == Mode.EVENT) {
+                    eventController.process(titleText.getText(), ignoreText.getText());
+                } else {
+                    filterController.process(titleText.getText(), ignoreText.getText());
+                }
             }
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                eventController.process(titleText.getText(), ignoreText.getText());
+                if (mode == Mode.EVENT) {
+                    eventController.process(titleText.getText(), ignoreText.getText());
+                } else {
+                    filterController.process(titleText.getText(), ignoreText.getText());
+                }
             }
 
         });
@@ -131,12 +141,20 @@ public class GUIMain {
 
             @Override
             public void removeUpdate(DocumentEvent e) {
-                eventController.process(titleText.getText(), ignoreText.getText());
+                if (mode == Mode.EVENT) {
+                    eventController.process(titleText.getText(), ignoreText.getText());
+                } else {
+                    filterController.process(titleText.getText(), ignoreText.getText());
+                }
             }
 
             @Override
             public void insertUpdate(DocumentEvent e) {
-                eventController.process(titleText.getText(), ignoreText.getText());
+                if (mode == Mode.EVENT) {
+                    eventController.process(titleText.getText(), ignoreText.getText());
+                } else {
+                    filterController.process(titleText.getText(), ignoreText.getText());
+                }
             }
 
         });
