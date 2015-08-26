@@ -11,10 +11,15 @@ import java.util.Arrays;
 public class Filter {
 
     //Attributes
-    public Filter Next = null;
+    private Filter Next;
+    private Pipes pipe;
+
 
     //Methods
-    public Filter(){}
+    public Filter(){
+        this.Next = null;
+        this.pipe = new Pipes();
+    }
     public void SetNext(Filter nextFilter){
         this.Next = nextFilter;
     }
@@ -42,6 +47,11 @@ public class Filter {
         }
         return  result.trim();
     }
+
+    public void callNext(Filter filter, ArrayList<String> parsingData){
+        pipe.callNext(filter,parsingData);
+    }
+
     public void run(ArrayList<String> para){}
 
 }

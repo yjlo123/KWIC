@@ -12,8 +12,6 @@ public class inputFilter extends Filter {
         super();
     }
     public void run(ArrayList<String> parsingPara){
-        if(this.hasNext()){
-            this.getNext().run(parsingPara);
-        }
+        this.callNext(this,parsingPara);
     }
 }
