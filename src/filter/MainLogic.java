@@ -7,8 +7,8 @@ import UI.GUI;
  */
 public class MainLogic {
 
-    private String titles="The Day after Tomorrow,Fast and Furious,Man of Steel",ignoredWords="is, the, of, and, as, a, after";
-    private FilterChain chain;
+    private String titles,ignoredWords;
+    private Pipes pipe;
     private inputFilter inputfilter;
     private shiftFilter shiftfilter;
     private alphabetizerFilter alphafilter;
@@ -18,31 +18,23 @@ public class MainLogic {
     }
 
     private void init(){
-        chain = new FilterChain();
+        pipe = new Pipes();
         inputfilter = new inputFilter();
         shiftfilter = new shiftFilter();
         alphafilter = new alphabetizerFilter();
         outputfilter = new outputFilter();
-        inputfilter.SetNext(shiftfilter);
-        shiftfilter.SetNext(alphafilter);
-        alphafilter.SetNext(outputfilter);
         setChain();
     }
 
     private void setChain(){
-        chain.add(inputfilter);
-        chain.add(shiftfilter);
-        chain.add(alphafilter);
-        chain.add(outputfilter);
-        chain.setHead(inputfilter);
-        chain.setTail(outputfilter);
-
+        pipe.add(inputfilter);
+        pipe.add(shiftfilter);
+        pipe.add(alphafilter);
+        pipe.add(outputfilter);
     }
 
     public void process(String title, String ignore){
-      //  System.out.println(title);
-       // System.out.println(ignore);
-        chain.run(title, ignore);
+        pipe.getHead().init(title, ignore);
     }
 
     public void setOutputGUI(GUI gui){

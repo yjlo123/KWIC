@@ -7,8 +7,27 @@ import java.util.ArrayList;
  */
 public class Pipes {
 
-    public Pipes(){}
+    //Attributes
+    private ArrayList<Filter> chain;
+    private ArrayList<String> parsingPara;
+    //Methods
+    public Pipes(){
+        chain = new ArrayList<Filter>();
+    }
     public void callNext(Filter currentFilter, ArrayList<String> parsingData){
-        currentFilter.getNext().run(parsingData);
+        int nextFilterIndex = chain.indexOf(currentFilter)+1;
+        chain.get(nextFilterIndex).run(parsingData);
+    }
+    public void add(Filter filter) {
+        chain.add(filter);
+    }
+    public Filter getHead(){
+        return chain.get(0);
+    }
+    public void run(String titles, String ignoredWords){
+        parsingPara = new ArrayList<String>();
+        parsingPara.add(titles);
+        parsingPara.add(ignoredWords);
+        this.getHead().run(parsingPara);
     }
 }

@@ -48,6 +48,9 @@ public class Filter {
         return  result.trim();
     }
 
+    public void init(String titles, String ignoredwords){
+    }
+
     public void callNext(Filter filter, ArrayList<String> parsingData){
         pipe.callNext(filter,parsingData);
     }
