@@ -8,18 +8,23 @@ import java.util.ArrayList;
 public class Pipes {
 
     //Attributes
-    private ArrayList<Filter> chain;
+    public static ArrayList<Filter> chain;
     private ArrayList<String> parsingPara;
     //Methods
     public Pipes(){
         chain = new ArrayList<Filter>();
     }
-    public void callNext(Filter currentFilter, ArrayList<String> parsingData){
-        int nextFilterIndex = chain.indexOf(currentFilter)+1;
+    public static void callNext(Filter currentFilter, ArrayList<String> parsingData){
+        //System.out.println(this.chain.size());
+        int nextFilterIndex;
+        nextFilterIndex = chain.indexOf(currentFilter)+1;
+        //System.out.println(nextFilterIndex);
         chain.get(nextFilterIndex).run(parsingData);
     }
     public void add(Filter filter) {
+       // System.out.println("Here!");
         chain.add(filter);
+
     }
     public Filter getHead(){
         return chain.get(0);

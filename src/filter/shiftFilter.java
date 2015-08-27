@@ -31,7 +31,7 @@ public class shiftFilter extends Filter {
         outputString = convertToOutputString(outputList);
         String replace = parsingPara.set(0,outputString);// Save and Provide AlphaFilter with the UNSORTED String.
         //call next according to the filter chain
-        this.callNext(this,parsingPara);
+        this.callPipe(this,parsingPara);
     }
 
     private void initialiseStringList(String titles, String ignoredWords){

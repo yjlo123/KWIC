@@ -2,32 +2,19 @@ package filter;
 
 import javax.xml.soap.SAAJResult;
 import java.lang.reflect.Array;
+import java.nio.channels.Pipe;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 /**
  * Created by haojiang on 20/8/15.
  */
 public class Filter {
 
     //Attributes
-    private Filter Next;
-    private Pipes pipe;
 
 
     //Methods
     public Filter(){
-        this.Next = null;
-        this.pipe = new Pipes();
-    }
-    public void SetNext(Filter nextFilter){
-        this.Next = nextFilter;
-    }
-    public boolean hasNext(){
-        return this.Next!=null;
-    }
-    public Filter getNext(){
-        return this.Next;
     }
     public ArrayList<String> toStringList(String str){
         return new ArrayList<String>(Arrays.asList(str.split(",")));
@@ -51,8 +38,8 @@ public class Filter {
     public void init(String titles, String ignoredwords){
     }
 
-    public void callNext(Filter filter, ArrayList<String> parsingData){
-        pipe.callNext(filter,parsingData);
+    public void callPipe(Filter filter, ArrayList<String> parsingData){
+        Pipes.callNext(filter, parsingData);
     }
 
     public void run(ArrayList<String> para){}

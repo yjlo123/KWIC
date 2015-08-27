@@ -13,13 +13,9 @@ public class inputFilter extends Filter {
         super();
     }
 
-    public void init(String titles, String ignoredwords){
-        ArrayList<String> parsingData = new ArrayList<String >();
-        parsingData.add(titles);
-        parsingData.add(ignoredwords);
-        this.run(parsingData);
-    }
     public void run(ArrayList<String> parsingPara){
-        this.callNext(this,parsingPara);
+        System.out.println("here");
+        System.out.println(parsingPara.get(0));
+        this.callPipe(this,parsingPara);
     }
 }

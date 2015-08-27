@@ -2,6 +2,8 @@ package filter;
 
 import UI.GUI;
 
+import java.util.ArrayList;
+
 /**
  * Created by haojiang on 23/8/15.
  */
@@ -34,7 +36,11 @@ public class MainLogic {
     }
 
     public void process(String title, String ignore){
-        pipe.getHead().init(title, ignore);
+        //System.out.println(title);
+        ArrayList<String> parsingData = new ArrayList<String >();
+        parsingData.add(title);
+        parsingData.add(ignore);
+        pipe.getHead().run(parsingData);
     }
 
     public void setOutputGUI(GUI gui){

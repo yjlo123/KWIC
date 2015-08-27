@@ -24,7 +24,7 @@ public class alphabetizerFilter extends Filter{
         this.outputString = convertToOutputString(this.titlesList);
         String replace = parsingPara.set(0,outputString);// Save and Provide OutputFilter with SORTED String
         //call next according to the filter chain
-        this.callNext(this,parsingPara);
+        this.callPipe(this,parsingPara);
     }
     private void initialise(String titles){
         this.titlesList = new ArrayList<String>();
