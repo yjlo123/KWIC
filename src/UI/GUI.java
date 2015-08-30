@@ -97,11 +97,16 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public static void showResult(String result){
-        System.out.println(result);
+        //System.out.println(result);
         resultPanel.setText(result);
     }
 
     public void showMessage(String msg) {
         msgBox.setText(msg);
+    }
+
+    public void clear(){
+        titleText.setText("");
+        ignoreText.setText("");
     }
 }
