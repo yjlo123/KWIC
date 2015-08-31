@@ -14,8 +14,6 @@ public class inputFilter extends Filter {
     }
 
     public void run(ArrayList<String> parsingPara){
-        //System.out.println("here");
-        //System.out.println(parsingPara.get(0));
         this.callPipe(this,parsingPara);
     }
 }

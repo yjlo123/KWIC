@@ -22,7 +22,6 @@ public class Pipes {
         chain.get(nextFilterIndex).run(parsingData);
     }
     public void add(Filter filter) {
-       // System.out.println("Here!");
         chain.add(filter);
 
     }

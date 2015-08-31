@@ -48,11 +48,13 @@ public class shiftFilter extends Filter {
             ArrayList<String> singleTitleList = new ArrayList<String>();
 
             singleTitleList = splitEachTitle(title);
-            if(!firstWordIsIgnored(singleTitleList.get(0))){
-                outputList.add(toString(singleTitleList));
+            if(singleTitleList.size()!=0){
+                if(!firstWordIsIgnored(singleTitleList.get(0))){
+                    outputList.add(toString(singleTitleList));
+                }
             }
 
-            for(int i=0;i<singleTitleList.size()-1;i++){
+            for(int i=0;i<singleTitleList.size()-2;i++){
                 singleTitleList = Shift(singleTitleList);
                 if(!firstWordIsIgnored(singleTitleList.get(0))){
                     outputList.add(toString(singleTitleList));

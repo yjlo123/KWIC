@@ -17,7 +17,11 @@ public class Filter {
     public Filter(){
     }
     public ArrayList<String> toStringList(String str){
-        return new ArrayList<String>(Arrays.asList(str.split(",")));
+        String[] result = str.split(",");
+        for (int i = 0; i < result.length; i++){
+            result[i] = result[i].trim();
+        }
+        return new ArrayList<String>(Arrays.asList(result));
     }
     public ArrayList<String> toIgnoredList(String str){
         String[] result = str.split(",");
