@@ -16,7 +16,11 @@ public class Lines {
         lines.clear();
         String[] arr = str.split(",");
         for(int i = 0; i < arr.length; i++){
-            lines.add(arr[i].trim());
+            String line = arr[i].trim();
+            // ignore empty string
+            if (!line.equals("")){
+                lines.add(line);
+            }
         }
     }
 
@@ -47,7 +51,7 @@ public class Lines {
     public String toString(){
         String result = "";
         for (int i = 0; i < lines.size(); i++){
-            result += (lines.get(i)+"\n");
+            result += (lines.get(i).trim()+"\n");
         }
         return result;
     }

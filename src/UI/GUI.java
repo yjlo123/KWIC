@@ -79,12 +79,12 @@ public class GUI extends JPanel implements ActionListener {
         gbc.fill = GridBagConstraints.VERTICAL;
         add(scrollIgnoreText, gbc);
 
-        resultPanel = new JTextArea(30, 40);
+        resultPanel = new JTextArea(30, 55);
         resultPanel.setForeground(Color.GREEN);
         resultPanel.setBackground(Color.BLACK);
         resultPanel.setFont(font);
         resultPanel.setLineWrap(true);
-        resultPanel.setEditable(false);
+        //resultPanel.setEditable(false);
         JScrollPane scrollResultText = new JScrollPane(resultPanel);
         scrollResultText.setBorder(BorderFactory.createMatteBorder(
                 5, 0, 5, 5, Color.GRAY));

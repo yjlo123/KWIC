@@ -15,11 +15,15 @@ import java.awt.event.ActionListener;
 public class GUIMain {
 
     public static final String APP_TITLE = "KWIC";
+    public static final String FILTER_MODE = "Filter mode.";
+    public static final String EVENT_MODE = "Event mode.";
+
     private enum Mode{
         EVENT, FILTER
     }
 
     public static Mode mode;
+    public static boolean realTime;
     static final GUI mGUI = new GUI();
 
     static final JTextArea titleText = mGUI.titleText;
@@ -27,9 +31,26 @@ public class GUIMain {
 
     static final Controller eventController = new Controller();
     static final MainLogic filterController = new MainLogic();
+    static DocumentListener realTimeListener;
 
     public static void main(String arg[]){
         mode = Mode.EVENT;
+        realTime = true;
+        realTimeListener = new DocumentListener() {
+            @Override
+            public void changedUpdate(DocumentEvent e) {}
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                update();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                update();
+            }
+
+        };
         eventController.setOutputGUI(mGUI);
         filterController.setOutputGUI(mGUI);
         createAndShowGUI();
@@ -41,18 +62,16 @@ public class GUIMain {
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 
-
-
         ActionListener actionModeEvent = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mGUI.showMessage("Event mode.");
+                mGUI.showMessage(EVENT_MODE);
                 mode = Mode.EVENT;
             }
         };
 
         ActionListener actionModeFilter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mGUI.showMessage("Filter mode.");
+                mGUI.showMessage(FILTER_MODE);
                 mode = Mode.FILTER;
             }
         };
@@ -60,6 +79,13 @@ public class GUIMain {
         ActionListener actionRun = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 updateWithTime();
+            }
+        };
+
+        ActionListener actionRealTime = new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                realTime = !realTime;
+                addListeners(realTime);
             }
         };
 
@@ -113,6 +139,10 @@ public class GUIMain {
         JMenuItem itemRun = new JMenuItem("Run");
         itemRun.addActionListener(actionRun);
         runMenu.add(itemRun);
+        runMenu.addSeparator();
+        JCheckBoxMenuItem itemRealTime = new JCheckBoxMenuItem("Real-time", true);
+        itemRealTime.addActionListener(actionRealTime);
+        runMenu.add(itemRealTime);
         menuBar.add(runMenu);
 
         //menuBar.setBorder(new BevelBorder(BevelBorder.RAISED));
@@ -127,49 +157,19 @@ public class GUIMain {
         frame.setVisible(true);
         frame.setResizable(false);
 
-        addListeners();
-        mGUI.showMessage("Event mode.");
+        addListeners(realTime);
+        mGUI.showMessage(EVENT_MODE);
 
     }
 
-    private static void addListeners(){
-
-
-        titleText.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                update();
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                update();
-            }
-
-        });
-
-        ignoreText.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                update();
-            }
-
-            @Override
-            public void insertUpdate(DocumentEvent e) {
-                update();
-            }
-
-        });
+    private static void addListeners(boolean b){
+        if (b) {
+            titleText.getDocument().addDocumentListener(realTimeListener);
+            ignoreText.getDocument().addDocumentListener(realTimeListener);
+        }else{
+            titleText.getDocument().removeDocumentListener(realTimeListener);
+            ignoreText.getDocument().removeDocumentListener(realTimeListener);
+        }
     }
 
     public static void update(){
@@ -187,9 +187,9 @@ public class GUIMain {
         long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         if (mode == Mode.EVENT) {
-            mGUI.showMessage("Event mode. Total time used: "+totalTime+" ms.");
+            mGUI.showMessage(EVENT_MODE + " Total time used: " + totalTime + " ms.");
         }else{
-            mGUI.showMessage("Filter mode. Total time used: "+totalTime+" ms.");
+            mGUI.showMessage(FILTER_MODE + " Total time used: " + totalTime + " ms.");
         }
     }
 }
