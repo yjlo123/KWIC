@@ -17,7 +17,6 @@ public class alphabetizerFilter extends Filter{
         super();
 
     }
-
     public void run(ArrayList<String> parsingPara){
         initialise(parsingPara.get(0));
         Collections.sort(titlesList);

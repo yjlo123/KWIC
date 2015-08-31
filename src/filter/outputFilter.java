@@ -20,7 +20,6 @@ public class outputFilter extends Filter {
         this.gui = gui;
     }
     public void run(ArrayList<String> para){
-        //System.out.print(para.get(0));
         gui.showResult(para.get(0));
     }
 }

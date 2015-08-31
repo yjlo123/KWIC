@@ -36,7 +36,6 @@ public class MainLogic {
     }
 
     public void process(String title, String ignore){
-        //System.out.println(title);
         ArrayList<String> parsingData = new ArrayList<String >();
         parsingData.clear();
         parsingData.add(title);

@@ -25,7 +25,6 @@ public class shiftFilter extends Filter {
     public void run(ArrayList<String> parsingPara){
         inputignoredwords = parsingPara.get(1);
         inputtitles = parsingPara.get(0);
-        //System.out.println(inputtitles);
         initialiseStringList(inputtitles, inputignoredwords);
         CircularlyShift();
         outputString = convertToOutputString(outputList);
@@ -42,19 +41,11 @@ public class shiftFilter extends Filter {
         titlesList = toStringList(titles);
         ignoredWordsList = toIgnoredList(ignoredWords);
     }
-
     private void CircularlyShift(){
         for(String title : titlesList){
             ArrayList<String> singleTitleList = new ArrayList<String>();
-
             singleTitleList = splitEachTitle(title);
-            if(singleTitleList.size()!=0){
-                if(!firstWordIsIgnored(singleTitleList.get(0))){
-                    outputList.add(toString(singleTitleList));
-                }
-            }
-
-            for(int i=0;i<singleTitleList.size()-2;i++){
+            for(int i=0;i<singleTitleList.size();i++){
                 singleTitleList = Shift(singleTitleList);
                 if(!firstWordIsIgnored(singleTitleList.get(0))){
                     outputList.add(toString(singleTitleList));
@@ -62,18 +53,19 @@ public class shiftFilter extends Filter {
             }
         }
     }
-
     private String changeCase(String str){
-        if (this.inputignoredwords.contains(str.toLowerCase())){
-            return str.toLowerCase();
-        }else{
-            return str.substring(0, 1).toUpperCase() + str.substring(1);
+        if(str.length()>=2){
+            if (firstWordIsIgnored(str.toLowerCase())){
+                return str.toLowerCase();
+            }else{
+                return str.substring(0, 1).toUpperCase() + str.substring(1);
+            }
+        }
+        else{
+            return str.toUpperCase();
         }
     }
     private ArrayList<String> splitEachTitle(String title){
-        return splitbySpace(title);
-    }
-    private ArrayList<String> splitbySpace(String title){
         String[] result = title.split(" +");
         for (int i = 0; i < result.length; i++){
             result[i] = result[i].trim();
@@ -86,7 +78,13 @@ public class shiftFilter extends Filter {
         return lst;
     }
     private boolean firstWordIsIgnored(String firstWord){
-        return ignoredWordsList.contains(firstWord);
+        boolean result = false;
+        for(int i = 0; i<ignoredWordsList.size();i++){
+            if(ignoredWordsList.get(i).equalsIgnoreCase(firstWord)){
+                result = true;
+            }
+        }
+        return result;
     }
     private String convertToOutputString(ArrayList<String> strList){
         String result = "";

@@ -14,8 +14,7 @@ public class Filter {
 
 
     //Methods
-    public Filter(){
-    }
+    public Filter(){}
     public ArrayList<String> toStringList(String str){
         String[] result = str.split(",");
         for (int i = 0; i < result.length; i++){
@@ -30,7 +29,6 @@ public class Filter {
         }
         return new ArrayList<String>(Arrays.asList(result));
     }
-
     public String toString(ArrayList<String> strList){
         String result = "";
         for(String item : strList){
@@ -38,14 +36,9 @@ public class Filter {
         }
         return  result.trim();
     }
-
-    public void init(String titles, String ignoredwords){
-    }
-
     public void callPipe(Filter filter, ArrayList<String> parsingData){
         Pipes.callNext(filter, parsingData);
     }
 
     public void run(ArrayList<String> para){}
-
 }
