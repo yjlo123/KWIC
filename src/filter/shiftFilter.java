@@ -54,15 +54,15 @@ public class shiftFilter extends Filter {
         }
     }
     private String changeCase(String str){
-        if(str.length()>=2){
-            if (firstWordIsIgnored(str.toLowerCase())){
-                return str.toLowerCase();
-            }else{
+        if (Controller.ignoreWords.contains(str.toLowerCase())) {
+            return str.toLowerCase();
+        } else {
+            if (str.length()>=2) {
                 return str.substring(0, 1).toUpperCase() + str.substring(1);
+            }else{
+                // one letter word
+                return str.toUpperCase();
             }
-        }
-        else{
-            return str.toUpperCase();
         }
     }
     private ArrayList<String> splitEachTitle(String title){

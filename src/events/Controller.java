@@ -26,19 +26,18 @@ public class Controller {
     }
 
     public void init(){
+        // add listeners
         input.addListener(circularShift);
         circularShift.addListener(alphabetizer);
         alphabetizer.addListener(output);
     }
 
     public void process(String title, String ignore){
+        // parser string
         lines.parse(title);
         ignoreWords.parse(ignore.toLowerCase());
+        // update input
         input.update();
-    }
-
-    public void setOutputGUI(GUI gui){
-        output.setOutputGUI(gui);
     }
 
 }

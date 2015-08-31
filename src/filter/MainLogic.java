@@ -43,7 +43,4 @@ public class MainLogic {
         pipe.getHead().run(parsingData);
     }
 
-    public void setOutputGUI(GUI gui){
-        outputfilter.setOutputGUI(gui);
-    }
 }

@@ -9,17 +9,12 @@ import java.util.ArrayList;
  */
 public class outputFilter extends Filter {
 
-    private static GUI gui;
-
     //Methods
     public outputFilter(){
         super();
     }
 
-    public void setOutputGUI(GUI gui){
-        this.gui = gui;
-    }
     public void run(ArrayList<String> para){
-        gui.showResult(para.get(0));
+        GUI.showResult(para.get(0));
     }
 }

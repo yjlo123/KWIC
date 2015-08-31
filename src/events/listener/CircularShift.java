@@ -48,14 +48,17 @@ public class CircularShift implements Listener {
 
     // ignore words in lower case, keyword in upper case
     private String changeCase(String str){
-        if (str.length()>=2) {
-            if (Controller.ignoreWords.contains(str.toLowerCase())) {
-                return str.toLowerCase();
-            } else {
+        if (Controller.ignoreWords.contains(str.toLowerCase())) {
+            // ignore words in lower case
+            return str.toLowerCase();
+        } else {
+            // capitalize the key word
+            if (str.length() >= 2) {
                 return str.substring(0, 1).toUpperCase() + str.substring(1);
+            }else{
+                // one letter word
+                return str.toUpperCase();
             }
-        }else{
-            return str.toUpperCase();
         }
     }
 }

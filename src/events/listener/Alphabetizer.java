@@ -20,7 +20,7 @@ public class Alphabetizer implements Listener {
 
     @Override
     public void update() {
-        //Collections.sort(Controller.shiftedLines);
+        // sort lines
         Lines lines = Controller.shiftedLines;
         for(int i=1;i<lines.size();i++){
 

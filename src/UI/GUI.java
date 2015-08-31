@@ -18,14 +18,12 @@ public class GUI extends JPanel implements ActionListener {
     public JTextArea titleText;
     public JTextArea ignoreText;
     public static JTextArea resultPanel;
-
-    GridBagConstraints gbc = new GridBagConstraints();
+    private GridBagConstraints gbc = new GridBagConstraints();
 
     @Override
     public void actionPerformed(ActionEvent e) {
 
     }
-
 
     public GUI() {
         super(new GridBagLayout());
@@ -84,7 +82,7 @@ public class GUI extends JPanel implements ActionListener {
         resultPanel.setBackground(Color.BLACK);
         resultPanel.setFont(font);
         resultPanel.setLineWrap(true);
-        //resultPanel.setEditable(false);
+        resultPanel.setEditable(false);
         JScrollPane scrollResultText = new JScrollPane(resultPanel);
         scrollResultText.setBorder(BorderFactory.createMatteBorder(
                 5, 0, 5, 5, Color.GRAY));
@@ -97,7 +95,6 @@ public class GUI extends JPanel implements ActionListener {
     }
 
     public static void showResult(String result){
-        //System.out.println(result);
         resultPanel.setText(result);
     }
 

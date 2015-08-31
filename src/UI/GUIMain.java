@@ -51,8 +51,6 @@ public class GUIMain {
             }
 
         };
-        eventController.setOutputGUI(mGUI);
-        filterController.setOutputGUI(mGUI);
         createAndShowGUI();
     }
 
@@ -89,7 +87,6 @@ public class GUIMain {
             }
         };
 
-
         ActionListener actionExit = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 System.exit(0);
@@ -102,39 +99,37 @@ public class GUIMain {
             }
         };
 
+        //Menus
 
         JMenuBar menuBar = new JMenuBar();
         frame.setJMenuBar(menuBar);
-        //Menus
-        JMenu menuFile = new JMenu("File");
-        menuBar.add(menuFile);
 
+        // file menu
+        JMenu fileMenu = new JMenu("File");
+        menuBar.add(fileMenu);
         JMenuItem itemClear = new JMenuItem("Clear");
-        menuFile.add(itemClear);
+        fileMenu.add(itemClear);
         itemClear.addActionListener(actionClear);
-
-        menuFile.addSeparator();
-
+        fileMenu.addSeparator();
         JMenuItem itemQuit = new JMenuItem("Quit");
-        menuFile.add(itemQuit);
+        fileMenu.add(itemQuit);
         itemQuit.addActionListener(actionExit);
 
+        // mode menu
+        JMenu modeMenu = new JMenu("Mode");
+        menuBar.add(modeMenu);
+        ButtonGroup group = new ButtonGroup();
         JRadioButtonMenuItem eventMode = new JRadioButtonMenuItem("Event");
         eventMode.setSelected(true);
         eventMode.addActionListener(actionModeEvent);
         JRadioButtonMenuItem filterMode = new JRadioButtonMenuItem("Filter");
         filterMode.addActionListener(actionModeFilter);
-
-        JMenu modeMenu = new JMenu("Mode");
-        ButtonGroup group = new ButtonGroup();
         group.add(eventMode);
         group.add(filterMode);
-
         modeMenu.add(eventMode);
         modeMenu.add(filterMode);
 
-        menuBar.add(modeMenu);
-
+        // run menu
         JMenu runMenu = new JMenu("Run");
         JMenuItem itemRun = new JMenuItem("Run");
         itemRun.addActionListener(actionRun);
@@ -145,12 +140,9 @@ public class GUIMain {
         runMenu.add(itemRealTime);
         menuBar.add(runMenu);
 
-        //menuBar.setBorder(new BevelBorder(BevelBorder.RAISED));
 
         //Add contents to the window.
-
         frame.add(mGUI);
-        //frame.setUndecorated(true);
         //Display the window.
         frame.pack();
         frame.setLocationRelativeTo(null);
@@ -162,6 +154,7 @@ public class GUIMain {
 
     }
 
+    // add realtime listener
     private static void addListeners(boolean b){
         if (b) {
             titleText.getDocument().addDocumentListener(realTimeListener);
@@ -172,6 +165,7 @@ public class GUIMain {
         }
     }
 
+    // compute results
     public static void update(){
         if (mode == Mode.EVENT) {
             eventController.process(titleText.getText(), ignoreText.getText());
@@ -181,6 +175,7 @@ public class GUIMain {
 
     }
 
+    // compute result with measurement
     public static void updateWithTime(){
         long startTime = System.currentTimeMillis();
         update();
