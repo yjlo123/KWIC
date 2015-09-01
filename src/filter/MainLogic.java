@@ -27,7 +27,6 @@ public class MainLogic {
         outputfilter = new outputFilter();
         setChain();
     }
-
     private void setChain(){
         pipe.add(inputfilter);
         pipe.add(shiftfilter);
