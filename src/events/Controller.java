@@ -32,10 +32,7 @@ public class Controller {
         alphabetizer.addListener(output);
     }
 
-    public void process(String title, String ignore){
-        // parser string
-        lines.parse(title);
-        ignoreWords.parse(ignore.toLowerCase());
+    public void process(){
         // update input
         input.update();
     }

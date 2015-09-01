@@ -35,12 +35,8 @@ public class MainLogic {
         pipe.add(outputfilter);
     }
 
-    public void process(String title, String ignore){
-        ArrayList<String> parsingData = new ArrayList<String >();
-        parsingData.clear();
-        parsingData.add(title);
-        parsingData.add(ignore);
-        pipe.getHead().run(parsingData);
+    public void process(){
+        pipe.getHead().run(null);
     }
 
 }

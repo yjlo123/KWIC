@@ -26,8 +26,8 @@ public class GUIMain {
     public static boolean realTime;
     static final GUI mGUI = new GUI();
 
-    static final JTextArea titleText = mGUI.titleText;
-    static final JTextArea ignoreText = mGUI.ignoreText;
+    static final JTextArea titleText = GUI.titleText;
+    static final JTextArea ignoreText = GUI.ignoreText;
 
     static final Controller eventController = new Controller();
     static final MainLogic filterController = new MainLogic();
@@ -62,14 +62,14 @@ public class GUIMain {
 
         ActionListener actionModeEvent = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mGUI.showMessage(EVENT_MODE);
+                GUI.showMessage(EVENT_MODE);
                 mode = Mode.EVENT;
             }
         };
 
         ActionListener actionModeFilter = new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                mGUI.showMessage(FILTER_MODE);
+                GUI.showMessage(FILTER_MODE);
                 mode = Mode.FILTER;
             }
         };
@@ -150,7 +150,7 @@ public class GUIMain {
         frame.setResizable(false);
 
         addListeners(realTime);
-        mGUI.showMessage(EVENT_MODE);
+        GUI.showMessage(EVENT_MODE);
 
     }
 
@@ -168,9 +168,9 @@ public class GUIMain {
     // compute results
     public static void update(){
         if (mode == Mode.EVENT) {
-            eventController.process(titleText.getText(), ignoreText.getText());
+            eventController.process();
         } else {
-            filterController.process(titleText.getText(), ignoreText.getText());
+            filterController.process();
         }
 
     }
@@ -182,9 +182,9 @@ public class GUIMain {
         long endTime   = System.currentTimeMillis();
         long totalTime = endTime - startTime;
         if (mode == Mode.EVENT) {
-            mGUI.showMessage(EVENT_MODE + " Total time used: " + totalTime + " ms.");
+            GUI.showMessage(EVENT_MODE + " Total time used: " + totalTime + " ms.");
         }else{
-            mGUI.showMessage(FILTER_MODE + " Total time used: " + totalTime + " ms.");
+            GUI.showMessage(FILTER_MODE + " Total time used: " + totalTime + " ms.");
         }
     }
 }

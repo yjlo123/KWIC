@@ -7,6 +7,7 @@ import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Created by siwei on 20/8/15.
@@ -14,10 +15,10 @@ import java.awt.event.ActionListener;
 
 public class GUI extends JPanel implements ActionListener {
 
-    protected JTextField msgBox;
-    public JTextArea titleText;
-    public JTextArea ignoreText;
-    public static JTextArea resultPanel;
+    protected static JTextField msgBox;
+    protected static JTextArea titleText;
+    protected static JTextArea ignoreText;
+    protected static JTextArea resultPanel;
     private GridBagConstraints gbc = new GridBagConstraints();
 
     @Override
@@ -98,7 +99,14 @@ public class GUI extends JPanel implements ActionListener {
         resultPanel.setText(result);
     }
 
-    public void showMessage(String msg) {
+    public static ArrayList<String> getText(){
+        ArrayList<String> text = new ArrayList<String>();
+        text.add(titleText.getText());
+        text.add(ignoreText.getText());
+        return text;
+    }
+
+    public static void showMessage(String msg) {
         msgBox.setText(msg);
     }
 
