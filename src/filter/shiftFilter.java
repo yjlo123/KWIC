@@ -54,7 +54,7 @@ public class shiftFilter extends Filter {
         }
     }
     private String changeCase(String str){
-        if (Controller.ignoreWords.contains(str.toLowerCase())) {
+        if (ignoredWordsList.contains(str.toLowerCase())) {
             return str.toLowerCase();
         } else {
             if (str.length()>=2) {
